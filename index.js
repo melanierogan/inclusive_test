@@ -100,7 +100,7 @@ const run = async () => {
 		});
 		if (result[0].status) {
 			console.log('WE OUT HERE');
-			newComment();
+			newComment;
 		}
 
 		return 'banana';
