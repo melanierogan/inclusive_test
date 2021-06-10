@@ -84,7 +84,8 @@ const run = async () => {
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
 
-		const newComment = await octokit.issues.createComment({
+		const allowComment = new github.getOctokit(token);
+		const newComment = await allowComment.issues.createComment({
 			owner: 'melanierogan',
 			repo: 'inclusivebot-workshop',
 			issue_number: 59,
@@ -92,7 +93,7 @@ const run = async () => {
 		});
 		if (result[0].status) {
 			console.log('WE OUT HERE');
-			newComment;
+			newComment();
 		}
 
 
