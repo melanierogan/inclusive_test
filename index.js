@@ -84,8 +84,8 @@ const run = async () => {
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
 
-		// const allowComment = new github.GitHub(token);
-		const newComment = await octokit.issues.createComment({
+		const allowComment = new github.GitHub(token);
+		const newComment = await allowComment.issues.createComment({
 			owner: owner,
 			repo: repoName,
 			issue_number: pull_number,
