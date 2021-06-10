@@ -20,11 +20,11 @@ const run = async () => {
 		const pull_number = payload.number;
 		const repoName = repo.repo;
 
-		const { data: pullRequest } = await octokit.pulls.get({
-			owner: owner,
-			repo: repoName,
-			pull_number: pull_number,
-		});
+		// const { data: pullRequest } = await octokit.pulls.get({
+		// 	owner: owner,
+		// 	repo: repoName,
+		// 	pull_number: pull_number,
+		// });
 		//this now works
 		//TODO
 		//Get files patch and use that as data for spliting down by those lines added
@@ -32,7 +32,7 @@ const run = async () => {
 		//THEN tidy up messaging
 		//THEN tidy up steps to recap
 
-		console.log(pullRequest, 'the pull request <<<<<');
+		// console.log(pullRequest, 'the pull request <<<<<');
 		const files = await octokit.rest.pulls.listFiles({
 			owner: owner,
 			repo: repoName,
