@@ -1,8 +1,14 @@
 name: Testing inclusive bot action
+
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
   pull_request:
-    branches:
-      - auto-build
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   test:
@@ -20,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Your inclusive bot
-      uses: melanierogan/inclusive_test@v1.7
+      uses: melanierogan/inclusive_test@v1.8
       with:
         github_token: ${{secrets.INCLUSIVE_BOT_TOKEN}}
         message: Some unfriendly or not inclusive words found
