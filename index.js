@@ -21,11 +21,11 @@ const run = async () => {
 		// const pull_number = 32;
 		// const repoName = repo.repo;
 
-		const { data: pullRequest } = await octokit.pulls.get({
-			owner: 'melanierogan',
-			repo: 'inclusivebot-workshop',
-			pull_number: 32,
-		});
+		// const { data: pullRequest } = await octokit.pulls.get({
+		// 	owner: 'melanierogan',
+		// 	repo: 'inclusivebot-workshop',
+		// 	pull_number: 32,
+		// });
 		//this now works
 		//TODO
 		//Get files patch and use that as data for spliting down by those lines added
