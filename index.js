@@ -16,10 +16,9 @@ const run = async () => {
 		console.log('GOT OCTOKIT AND GITHUB CONTEXT SHOULD BE ABOVE THIS');
 		const { repo, payload } = context;
 		console.log(repo, payload, 'WHAT IS THIS');
-		// const owner = payload.repository.owner.login;
-		// const pull_number = payload.number;
-		// const pull_number = 32;
-		// const repoName = repo.repo;
+		const owner = payload.repository.owner.login;
+		const pull_number = payload.number;
+		const repoName = repo.repo;
 
 		// const { data: pullRequest } = await octokit.pulls.get({
 		// 	owner: 'melanierogan',
@@ -35,9 +34,9 @@ const run = async () => {
 
 		// console.log(pullRequest, 'the pull request <<<<<');
 		const files = await octokit.rest.pulls.listFiles({
-			owner: 'melanierogan',
-			repo: 'inclusivebot-workshop',
-			pull_number: 43,
+			owner: owner,
+			repo: repoName,
+			pull_number: pull_number,
 		});
 
 		const checkCommit = files.data[0].patch.split('\n');
