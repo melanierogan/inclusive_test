@@ -10,10 +10,11 @@ const run = async () => {
 		const token = core.getInput('github_token');
 		console.log(token, '<<< does this work?');
 		const octokit = new github.getOctokit(token);
+		const context = github.context;
 
 		// console.log(github.context, 'what is the context');
 		console.log('GOT OCTOKIT AND GITHUB CONTEXT SHOULD BE ABOVE THIS');
-		const { repo, payload } = octokit.context;
+		const { repo, payload } = context;
 		console.log(repo, payload, 'WHAT IS THIS');
 		// const owner = payload.repository.owner.login;
 		// const pull_number = payload.number;
