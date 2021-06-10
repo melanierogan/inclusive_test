@@ -1,6 +1,15 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const unfriendlyWords = [
+	'whitelist',
+	'blacklist',
+	'simply',
+	'master',
+	'slave',
+	'just',
+	'guys',
+	'obviously',
+	'sane',
 	'banana',
 ];
 
@@ -8,23 +17,23 @@ const run = async () => {
 	try {
 		console.log('START OF TRY');
 		const token = core.getInput('github_token');
+		const message = core.getInput('message');
 		console.log(token, '<<< does this work?');
 		const octokit = new github.getOctokit(token);
-		const context = github.context;
 
 		// console.log(github.context, 'what is the context');
 		console.log('GOT OCTOKIT AND GITHUB CONTEXT SHOULD BE ABOVE THIS');
-		const { repo, payload } = context;
-		console.log(repo, payload, 'WHAT IS THIS');
-		const owner = payload.repository.owner.login;
-		const pull_number = payload.number;
-		const repoName = repo.repo;
+		// const { repo, payload } = github.context;
+		// const owner = payload.repository.owner.login;
+		// const pull_number = payload.number;
+		// const pull_number = 32;
+		// const repoName = repo.repo;
 
-		// const { data: pullRequest } = await octokit.pulls.get({
-		// 	owner: owner,
-		// 	repo: repoName,
-		// 	pull_number: pull_number,
-		// });
+		const { data: pullRequest } = await octokit.pulls.get({
+			owner: 'melanierogan',
+			repo: 'inclusivebot-workshop',
+			pull_number: 32,
+		});
 		//this now works
 		//TODO
 		//Get files patch and use that as data for spliting down by those lines added
@@ -34,9 +43,9 @@ const run = async () => {
 
 		// console.log(pullRequest, 'the pull request <<<<<');
 		const files = await octokit.rest.pulls.listFiles({
-			owner: owner,
-			repo: repoName,
-			pull_number: pull_number,
+			owner: 'melanierogan',
+			repo: 'inclusivebot-workshop',
+			pull_number: 43,
 		});
 
 		const checkCommit = files.data[0].patch.split('\n');
@@ -83,20 +92,18 @@ const run = async () => {
 		console.log(wordsFound, '<<< WHAT WORDS');
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
-
-		const allowComment = new github.getOctokit(token);
-		const newComment = await allowComment.issues.createComment({
-			owner: owner,
-			repo: repoName,
-			issue_number: pull_number,
+		const newComment = await octokit.issues.createComment({
+			owner: 'melanierogan',
+			repo: 'inclusivebot-workshop',
+			issue_number: 59,
 			body: isUnfriendlyComment,
 		});
 		if (result[0].status) {
 			console.log('WE OUT HERE');
-			newComment();
+			newComment;
 		}
 
-
+		return 'banana';
 	} catch (error) {
 		core.setFailed(error.message);
 	}
