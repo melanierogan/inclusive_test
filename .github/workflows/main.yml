@@ -1,0 +1,26 @@
+name: Testing inclusive bot action
+on:
+  pull_request:
+    types: [opened, edited]
+    branches: [ master ]
+
+jobs:
+  run-inclusivebot:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Your inclusive bot
+      uses: melanierogan/inclusive_testv1.2
+      with:
+        github_token: ${{secrets.INCLUSIVE_BOT_TOKEN}}
+        message: Some unfriendly or not inclusive words found
