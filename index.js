@@ -32,7 +32,7 @@ const run = async () => {
 		//THEN tidy up messaging
 		//THEN tidy up steps to recap
 
-		// console.log(pullRequest, 'the pull request <<<<<');
+		console.log(pullRequest, 'the pull request <<<<<');
 		const files = await octokit.rest.pulls.listFiles({
 			owner: owner,
 			repo: repoName,
@@ -84,11 +84,11 @@ const run = async () => {
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
 
-		const allowComment = new github.GitHub(token);
-		const newComment = await allowComment.issues.createComment({
-			owner: 'melanierogan',
-			repo: 'inclusivebot-workshop',
-			issue_number: 59,
+		// const allowComment = new github.GitHub(token);
+		const newComment = await octokit.issues.createComment({
+			owner: owner,
+			repo: repoName,
+			issue_number: pull_number,
 			body: isUnfriendlyComment,
 		});
 		if (result[0].status) {
