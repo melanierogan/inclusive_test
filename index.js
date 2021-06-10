@@ -23,11 +23,11 @@ const run = async () => {
 
 		// console.log(github.context, 'what is the context');
 		console.log('GOT OCTOKIT AND GITHUB CONTEXT SHOULD BE ABOVE THIS');
-		// const { repo, payload } = github.context;
-		// const owner = payload.repository.owner.login;
-		// const pull_number = payload.number;
-		// const pull_number = 32;
-		// const repoName = repo.repo;
+		const { repo, payload } = github.context;
+		const owner = payload.repository.owner.login;
+		const pull_number = payload.number;
+		const pull_number = 32;
+		const repoName = repo.repo;
 
 		// const { data: pullRequest } = await octokit.pulls.get({
 		// 	owner: 'melanierogan',
@@ -92,10 +92,11 @@ const run = async () => {
 		console.log(wordsFound, '<<< WHAT WORDS');
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
-		const newComment = await octokit.issues.createComment({
-			owner: 'melanierogan',
-			repo: 'inclusivebot-workshop',
-			issue_number: 59,
+
+		const newComment = await octokit.rest.issues.createComment({
+			owner: owner,
+			repo: repoName,
+			issue_number: pull_number,
 			body: isUnfriendlyComment,
 		});
 		if (result[0].status) {
