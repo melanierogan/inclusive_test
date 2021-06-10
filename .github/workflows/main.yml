@@ -1,5 +1,8 @@
 name: Testing inclusive bot action
 on:
+  issues:
+    types: [opened, edited]
+    branches: [ master ]
   pull_request:
     types: [opened, edited]
     branches: [ master ]
@@ -20,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Your inclusive bot
-      uses: melanierogan/inclusive_testv1.3
+      uses: melanierogan/inclusive_testv1.4
       with:
         github_token: ${{secrets.INCLUSIVE_BOT_TOKEN}}
         message: Some unfriendly or not inclusive words found
