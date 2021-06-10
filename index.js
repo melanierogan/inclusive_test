@@ -84,7 +84,7 @@ const run = async () => {
 		console.log(linesFound, '<<< WHAT LINES');
 		console.log(result, '<<< WHAT IS THE RESULT?');
 
-		const allowComment = new github.GitHub(token);
+		const allowComment = new github.getOctokit(token);
 		const newComment = await allowComment.issues.createComment({
 			owner: owner,
 			repo: repoName,
