@@ -95,7 +95,7 @@ const run = async () => {
 			newComment;
 		}
 
-		return 'run has completed';
+
 	} catch (error) {
 		core.setFailed(error.message);
 	}
