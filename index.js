@@ -26,7 +26,6 @@ const run = async () => {
 		const { repo, payload } = github.context;
 		const owner = payload.repository.owner.login;
 		const pull_number = payload.number;
-		const pull_number = 32;
 		const repoName = repo.repo;
 
 		// const { data: pullRequest } = await octokit.pulls.get({
